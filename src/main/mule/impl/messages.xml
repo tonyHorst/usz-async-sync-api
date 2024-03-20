@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:amqp="http://www.mulesoft.org/schema/mule/amqp" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/amqp http://www.mulesoft.org/schema/mule/amqp/current/mule-amqp.xsd">
+	<sub-flow name="messagesSub_Flow" doc:id="b6ea22a3-6e0c-4ab3-bb2f-ef36323eb5e1" >
+		<amqp:publish doc:name="Payload message" doc:id="92231408-e399-4a69-9871-827bb58b3873" config-ref="AMQP_Config" exchangeName="usz" deliveryMode="PERSISTENT">
+			<amqp:message>
+				<amqp:body ><![CDATA[#[%dw 2.0
+output text/plain
+---
+write(payload, "application/json")]]]></amqp:body>
+			</amqp:message>
+		</amqp:publish>
+	</sub-flow>
+</mule>
